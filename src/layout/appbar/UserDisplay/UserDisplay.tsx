@@ -1,18 +1,24 @@
 import { FC } from "react";
 import "./UserDisplay.scss";
-import UserInterface from "../../../interfaces/User";
 import Avatar from "./Avatar";
 import getInitials from "./get-initials";
+import { userUserStore } from "../../../store";
 
-type Props = Omit<UserInterface, "userId" | "email">;
+const UserDisplay: FC = () => {
+  const users = userUserStore((state) => state.users);
 
-const UserDisplay: FC<Props> = ({ firstName, lastName }) => {
   return (
     <span className="UserDisplay">
-      <Avatar initials={getInitials(firstName, lastName)} />
-      <span className="UserDisplay__name strong">
-        {firstName}&nbsp;{lastName}
-      </span>
+      {users.length !== 0 ? (
+        <>
+          <Avatar
+            initials={getInitials(users[0].firstName, users[0].lastName)}
+          />
+          <span className="UserDisplay__name strong">
+            {users[0].firstName}&nbsp;{users[0].lastName}
+          </span>
+        </>
+      ) : null}
     </span>
   );
 };

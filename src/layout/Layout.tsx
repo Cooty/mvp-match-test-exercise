@@ -17,7 +17,7 @@ const Layout: FC<PropsWithChildren> = ({ children }) => {
           <Logo />
           <MenuController />
         </Stack>
-        <UserDisplay firstName="John" lastName="Doe" />
+        <UserDisplay />
       </AppBar>
       <SideBar />
       <MainContent>{children}</MainContent>
