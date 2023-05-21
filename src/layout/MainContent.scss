@@ -1,0 +1,11 @@
+@import "../styles/config/";
+
+.MainContent {
+  flex: 1;
+  padding: $app-bar-height $app-bar-height + $gutter 0 $app-bar-height + $gutter;
+
+  &__wrapper {
+    max-width: $content-max-width;
+    margin: 0 auto;
+  }
+}

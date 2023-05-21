@@ -1,0 +1,26 @@
+@import "../styles/config/";
+
+.AppBar {
+  position: fixed;
+  z-index: $high;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  height: $app-bar-height;
+  background: $white;
+  padding-right: $app-bar-height + $gutter;
+
+  &:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 2px;
+    background-color: $light-blue;
+  }
+}

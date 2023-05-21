@@ -1,0 +1,12 @@
+@import "../styles/config/";
+
+.SideBar {
+  top: $app-bar-height;
+  position: fixed;
+  left: 0;
+  top: $app-bar-height;
+  bottom: 0;
+  z-index: $high;
+  width: $app-bar-height;
+  background: $white;
+}
