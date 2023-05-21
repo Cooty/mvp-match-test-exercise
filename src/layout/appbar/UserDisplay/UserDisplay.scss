@@ -1,0 +1,18 @@
+@import "../../../styles/config/";
+
+.UserDisplay {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  flex-wrap: nowrap;
+  align-items: center;
+
+  &__name {
+    display: inline-block;
+    max-width: 200px; // set some reasonable limit for names
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: $blue;
+  }
+}

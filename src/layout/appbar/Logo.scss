@@ -1,0 +1,9 @@
+@import "../../styles/config/";
+
+.Logo {
+  width: $app-bar-height;
+  height: $app-bar-height;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

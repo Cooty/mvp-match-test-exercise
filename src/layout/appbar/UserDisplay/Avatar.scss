@@ -1,0 +1,16 @@
+@import "../../../styles/config/";
+
+.Avatar {
+  --size: 43px;
+  width: var(--size);
+  height: var(--size);
+  overflow: hidden;
+  border-radius: $default-rounding;
+  background: $light-yellow;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4375rem;
+  text-transform: uppercase;
+  color: $white;
+}

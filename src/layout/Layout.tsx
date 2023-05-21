@@ -4,11 +4,21 @@ import MainContent from "./MainContent";
 import Footer from "./Footer";
 import "./Layout.scss";
 import SideBar from "./SideBar";
+import Logo from "./appbar/Logo";
+import MenuController from "./appbar/MenuController";
+import Stack from "../ui/Stack";
+import UserDisplay from "./appbar/UserDisplay/UserDisplay";
 
 const Layout: FC<PropsWithChildren> = ({ children }) => {
   return (
     <div className="Layout">
-      <AppBar>Appbar</AppBar>
+      <AppBar>
+        <Stack>
+          <Logo />
+          <MenuController />
+        </Stack>
+        <UserDisplay firstName="John" lastName="Doe" />
+      </AppBar>
       <SideBar />
       <MainContent>{children}</MainContent>
       <Footer>
