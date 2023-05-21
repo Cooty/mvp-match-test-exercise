@@ -1,0 +1,29 @@
+@import "./config/";
+
+body,
+html,
+body > div {
+  height: 100%;
+}
+
+html {
+  color: $dark-blue;
+  font-family: $primary-font;
+  background: $white;
+}
+
+a {
+  color: $blue;
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+  }
+}
+
+body {
+  // make the page scroll horizontally on smaller screens since we don't have a mobile layout
+  min-width: 1000px;
+  font-size: 1rem;
+}
