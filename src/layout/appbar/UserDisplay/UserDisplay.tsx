@@ -5,17 +5,15 @@ import getInitials from "./get-initials";
 import { userUserStore } from "../../../store";
 
 const UserDisplay: FC = () => {
-  const users = userUserStore((state) => state.users);
+  const user = userUserStore((state) => state.user);
 
   return (
     <span className="UserDisplay">
-      {users.length !== 0 ? (
+      {user !== null ? (
         <>
-          <Avatar
-            initials={getInitials(users[0].firstName, users[0].lastName)}
-          />
+          <Avatar initials={getInitials(user.firstName, user.lastName)} />
           <span className="UserDisplay__name strong">
-            {users[0].firstName}&nbsp;{users[0].lastName}
+            {user.firstName}&nbsp;{user.lastName}
           </span>
         </>
       ) : null}
