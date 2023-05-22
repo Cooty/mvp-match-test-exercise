@@ -4,10 +4,17 @@ import Reports from "./pages/Reports";
 import { userUserStore } from "./store";
 
 function App() {
-  const fetchUsers = userUserStore((state) => state.fetch);
+  const fetchUser = userUserStore((state) => state.fetch);
+  const fetchUserError = userUserStore((state) => state.error);
   useEffect(() => {
-    fetchUsers();
-  }, [fetchUsers]);
+    fetchUser();
+  }, [fetchUser]);
+
+  useEffect(() => {
+    if (fetchUserError !== null) {
+      throw new Error(fetchUserError);
+    }
+  }, [fetchUserError]);
 
   return (
     <Layout>
