@@ -1,0 +1,15 @@
+@import "../../styles/config/";
+
+.Filters {
+  position: static;
+  top: 0;
+  z-index: $low;
+  background: $white;
+  padding: 30px 0;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  flex-wrap: nowrap;
+  flex-direction: row;
+  gap: $gutter * 2;
+}

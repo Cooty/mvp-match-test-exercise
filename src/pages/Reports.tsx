@@ -1,9 +1,12 @@
 import { FC } from "react";
+import EmptyState from "./reports/EmptyState";
+import Filters from "./reports/Filters";
 
 const Reports: FC = () => {
   return (
     <>
-      <div>Everything related to reports goes here</div>
+      <Filters />
+      <EmptyState />
     </>
   );
 };

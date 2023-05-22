@@ -2,10 +2,16 @@
 
 .MainContent {
   flex: 1;
+  display: flex;
   padding: $app-bar-height $app-bar-height + $gutter 0 $app-bar-height + $gutter;
 
   &__wrapper {
+    position: relative;
+    z-index: $bottom;
     max-width: $content-max-width;
+    min-width: 100%;
     margin: 0 auto;
+    display: flex;
+    flex-direction: column;
   }
 }

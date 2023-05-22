@@ -1,0 +1,13 @@
+.EmptyState {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  max-width: 470px;
+  margin: auto;
+
+  &__illustration {
+    display: block;
+    margin: 0 auto;
+    padding: 0;
+  }
+}
