@@ -1,0 +1,7 @@
+@import "../styles/config/";
+
+.Box {
+  border-radius: $default-rounding * 2;
+  padding: $gutter;
+  background: $light-blue;
+}
