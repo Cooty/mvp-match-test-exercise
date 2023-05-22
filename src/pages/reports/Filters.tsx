@@ -1,6 +1,7 @@
 import { FC } from "react";
 import Stack from "../../ui/Stack";
 import "./Filters.scss";
+import Button from "../../ui/Button";
 
 const Filters: FC = () => {
   return (
@@ -25,7 +26,14 @@ const Filters: FC = () => {
           </select>
           <input type="date" name="from" />
           <input type="date" name="to" />
-          <button type="submit">Generate Report</button>
+          <Button
+            type="submit"
+            onClick={(e) => {
+              e.preventDefault();
+            }}
+          >
+            Generate Report
+          </Button>
         </Stack>
       </form>
     </div>
