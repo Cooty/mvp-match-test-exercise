@@ -14,9 +14,7 @@ export const userUserStore = create<UserState>()(
     error: null,
     fetch: async () => {
       try {
-        const response = await fetch(
-          `${import.meta.env.VITE_API_ROUTE}/users--`
-        );
+        const response = await fetch(`${import.meta.env.VITE_API_ROUTE}/users`);
         console.log(response);
         if (response.status === 200) {
           const json = await response.json();
