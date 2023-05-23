@@ -6,6 +6,13 @@ body > div {
   height: 100%;
 }
 
+:root {
+  --green: #{$green};
+  --dark-green: #{$dark-green};
+  --white: #{$white};
+  --placeholder-color: #{$placeholder-color};
+}
+
 html {
   color: $dark-blue;
   font-family: $primary-font;
