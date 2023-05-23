@@ -2,10 +2,10 @@ import { FC } from "react";
 import "./UserDisplay.scss";
 import Avatar from "./Avatar";
 import getInitials from "./get-initials";
-import { userUserStore } from "../../../store";
+import { useUserStore } from "../../../store";
 
 const UserDisplay: FC = () => {
-  const user = userUserStore((state) => state.user);
+  const user = useUserStore((state) => state.user);
 
   return (
     <span className="UserDisplay">

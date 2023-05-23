@@ -1,11 +1,11 @@
 import { useEffect } from "react";
 import Layout from "./layout/Layout";
 import Reports from "./pages/Reports";
-import { userUserStore } from "./store";
+import { useUserStore } from "./store";
 
 function App() {
-  const fetchUser = userUserStore((state) => state.fetch);
-  const fetchUserError = userUserStore((state) => state.error);
+  const fetchUser = useUserStore((state) => state.fetch);
+  const fetchUserError = useUserStore((state) => state.error);
   useEffect(() => {
     fetchUser();
   }, [fetchUser]);
