@@ -2,6 +2,7 @@
 
 .Button {
   padding: 8px 10px;
+  min-height: $form-element-min-height;
   border-radius: $default-rounding;
   transition: all $default-animation-time $default-easing;
   background: $blue;
@@ -12,6 +13,7 @@
   appearance: none;
   cursor: pointer;
   border: none;
+  white-space: nowrap;
 
   &:hover,
   &:focus {

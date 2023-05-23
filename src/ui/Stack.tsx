@@ -1,8 +1,14 @@
-import { FC, PropsWithChildren } from "react";
+import { FC, PropsWithChildren, HTMLAttributes, ReactNode } from "react";
 import "./Stack.scss";
 
-const Stack: FC<PropsWithChildren> = ({ children }) => {
-  return <div className="Stack">{children}</div>;
+type Props = HTMLAttributes<HTMLDivElement> & { children: ReactNode };
+
+const Stack: FC<Props> = ({ children, ...props }) => {
+  return (
+    <div className="Stack" {...props}>
+      {children}
+    </div>
+  );
 };
 
 export default Stack;

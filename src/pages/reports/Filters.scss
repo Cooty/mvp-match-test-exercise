@@ -1,8 +1,8 @@
 @import "../../styles/config/";
 
 .Filters {
-  position: static;
-  top: 0;
+  position: sticky;
+  top: $app-bar-height;
   z-index: $low;
   background: $white;
   padding: 30px 0;
@@ -12,4 +12,25 @@
   flex-wrap: nowrap;
   flex-direction: row;
   gap: $gutter * 2;
+
+  &__form {
+    flex: 1;
+    display: flex;
+    justify-content: right;
+    align-items: start;
+  }
+
+  &__datePickerContainer {
+    flex-basis: 118px;
+    max-width: 118px;
+    flex-shrink: 2;
+    flex-grow: 0;
+  }
+
+  &__selectContainer {
+    flex-basis: 135px;
+    max-width: 135px;
+    flex-shrink: 1;
+    flex-grow: 0;
+  }
 }

@@ -42,6 +42,7 @@ export const CustomSelect: FC<Props> = ({ options, placeholder, onChange }) => {
     placeholder: (baseStyle: object) => ({
       ...baseStyle,
       color: "var(--placeholder-color)",
+      whiteSpace: "nowrap",
     }),
     singleValue: (baseStyle: object) => ({
       ...baseStyle,
@@ -55,6 +56,8 @@ export const CustomSelect: FC<Props> = ({ options, placeholder, onChange }) => {
       ...baseStyle,
       backgroundColor: state.isFocused ? "var(--dark-green)" : "var(--green)",
       color: "var(--white)",
+      fontSize: "var(--form-font-size)",
+      fontFamily: "var(--primary-font)",
     }),
     menu: (baseStyle: object) => ({
       ...baseStyle,
@@ -74,6 +77,8 @@ export const CustomSelect: FC<Props> = ({ options, placeholder, onChange }) => {
       onChange={onChange}
       placeholder={placeholder}
       isSearchable={false}
+      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+      // @ts-ignore
       styles={customStyles}
       components={{ DropdownIndicator }}
     />

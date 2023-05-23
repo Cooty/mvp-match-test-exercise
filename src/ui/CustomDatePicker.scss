@@ -1,0 +1,44 @@
+@import "../styles/config/";
+
+// use this to customize he style of our 3rd party datepicker
+// https://reactdatepicker.com/
+.CustomDatePicker {
+  & .react-datepicker-wrapper,
+  & .react-datepicker__input-container {
+    min-height: $form-element-min-height;
+  }
+
+  & .react-datepicker__view-calendar-icon input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 6px 25px 5px 10px;
+    font-size: $form-element-size;
+    font-family: $primary-font;
+    border-radius: $default-rounding;
+    background-color: $green;
+    border: 1px solid $green;
+    color: $white;
+
+    &::placeholder {
+      color: $placeholder-color;
+    }
+
+    &:focus {
+      outline: none;
+      border-color: $dark-green;
+    }
+  }
+
+  & .react-datepicker__input-container .react-datepicker__calendar-icon {
+    z-index: 1;
+    top: 3px;
+    right: 0;
+
+    > path {
+      fill: $white;
+    }
+  }
+}
