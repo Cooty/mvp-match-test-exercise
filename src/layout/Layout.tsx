@@ -8,14 +8,17 @@ import Logo from "./appbar/Logo";
 import MenuController from "./appbar/MenuController";
 import Stack from "../ui/Stack";
 import UserDisplay from "./appbar/UserDisplay/UserDisplay";
+import { useMenu } from "../store";
 
 const Layout: FC<PropsWithChildren> = ({ children }) => {
+  const toggle = useMenu((state) => state.toggle);
+
   return (
     <div className="Layout">
       <AppBar>
         <Stack>
           <Logo />
-          <MenuController />
+          <MenuController onClick={toggle} />
         </Stack>
         <UserDisplay />
       </AppBar>
