@@ -1,4 +1,4 @@
-import { FC, PropsWithChildren, HTMLAttributes, ReactNode } from "react";
+import { FC, HTMLAttributes, ReactNode } from "react";
 import "./Stack.scss";
 
 type Props = HTMLAttributes<HTMLDivElement> & { children: ReactNode };
