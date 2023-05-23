@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useState, FormEvent } from "react";
 import Stack from "../../ui/Stack";
 import "./Filters.scss";
 import Button from "../../ui/Button";
@@ -26,6 +26,10 @@ const Filters: FC = () => {
   const toDateOnChangeHandler = (date: Date | null) => {
     setToDate(date);
   };
+  const submitHandler = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log("submit...");
+  };
 
   return (
     <div className="Filters">
@@ -35,7 +39,7 @@ const Filters: FC = () => {
           Easily generate a report of your transactions
         </p>
       </div>
-      <form className="Filters__form">
+      <form className="Filters__form" onSubmit={submitHandler}>
         <Stack style={{ flex: 1 }}>
           {projectOptions !== null && projectOptions.length !== 0 ? (
             <div className="Filters__selectContainer">
@@ -71,14 +75,7 @@ const Filters: FC = () => {
               dateFormat={dateFormat}
             />
           </div>
-          <Button
-            type="submit"
-            onClick={(e) => {
-              e.preventDefault();
-            }}
-          >
-            Generate Report
-          </Button>
+          <Button type="submit">Generate Report</Button>
         </Stack>
       </form>
     </div>
