@@ -8,12 +8,17 @@ interface ProjectsState {
   projects: Option[] | null;
   error: string | null;
   fetch: () => void;
+  selected?: Option;
+  setSelected: (selectedOption: Option) => void;
 }
 
 export const useProjectOptions = create<ProjectsState>()(
   devtools((set) => ({
     projects: [],
     error: null,
+    setSelected: (selectedOption: Option) => {
+      set({ selected: selectedOption });
+    },
     fetch: async () => {
       try {
         const response = await fetch(

@@ -1,24 +1,53 @@
-import { FC, useState, FormEvent } from "react";
+import { FC, useState, FormEvent, useEffect } from "react";
 import Stack from "../../ui/Stack";
 import "./Filters.scss";
 import Button from "../../ui/Button";
 import { CustomSelect } from "../../ui/CustomSelect";
-import { useProjectOptions, useGatewayOptions } from "../../store";
+import {
+  useProjectOptions,
+  useGatewayOptions,
+  useReports,
+  useFilters,
+} from "../../store";
 import { SingleValue } from "react-select";
 import { Option } from "../../ui/CustomSelect";
-import CustomDatePicker from "../../ui/CustomDatePicker";
+import CustomDatePicker from "../../date/CustomDatePicker";
+import ReportsPayload from "../../interfaces/ReportsPayload";
+import getISODateString from "../../date/get-iso-date-string";
 
 const Filters: FC = () => {
   const projectOptions = useProjectOptions((state) => state.projects);
   const gatewayOptions = useGatewayOptions((state) => state.gateways);
+  const setSelectedProjectOption = useProjectOptions(
+    (state) => state.setSelected
+  );
+  const selectedProjectOption = useProjectOptions((state) => state.selected);
+  const setSelectedGatewayOption = useGatewayOptions(
+    (state) => state.setSelected
+  );
+  const setFiltersToTouched = useFilters((state) => state.setToTouched);
+  const selectedGatewayOption = useGatewayOptions((state) => state.selected);
+  const fetchReports = useReports((state) => state.fetch);
+  const isReportsLoading = useReports((state) => state.isLoading);
+  const reportsError = useReports((state) => state.error);
   const dateFormat = "MM.dd.yyyy";
   const [toDate, setToDate] = useState<Date | null>(null);
   const [fromDate, setFromDate] = useState<Date | null>(null);
   const projectsOnChangeHandler = (newValue: SingleValue<Option>) => {
-    console.log(newValue?.label, newValue?.value);
+    if (newValue?.label && newValue?.value) {
+      setSelectedProjectOption({
+        label: newValue.label,
+        value: newValue.value,
+      });
+    }
   };
   const gatewaysOnChangeHandler = (newValue: SingleValue<Option>) => {
-    console.log(newValue?.label, newValue?.value);
+    if (newValue?.label && newValue?.value) {
+      setSelectedGatewayOption({
+        label: newValue.label,
+        value: newValue.value,
+      });
+    }
   };
   const fromDateOnChangeHandler = (date: Date | null) => {
     setFromDate(date);
@@ -28,8 +57,25 @@ const Filters: FC = () => {
   };
   const submitHandler = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("submit...");
+    setFiltersToTouched();
+    const to = toDate && toDate instanceof Date ? getISODateString(toDate) : "";
+    const from =
+      fromDate && fromDate instanceof Date ? getISODateString(fromDate) : "";
+    const projectId = selectedProjectOption ? selectedProjectOption.value : "";
+    const gatewayId = selectedGatewayOption ? selectedGatewayOption.value : "";
+    const payload: ReportsPayload = {
+      to,
+      from,
+      projectId,
+      gatewayId,
+    };
+    fetchReports(payload);
   };
+  useEffect(() => {
+    if (reportsError !== null) {
+      throw new Error(reportsError);
+    }
+  }, [reportsError]);
 
   return (
     <div className="Filters">
@@ -75,7 +121,9 @@ const Filters: FC = () => {
               dateFormat={dateFormat}
             />
           </div>
-          <Button type="submit">Generate Report</Button>
+          <Button type="submit" disabled={isReportsLoading}>
+            Generate Report
+          </Button>
         </Stack>
       </form>
     </div>

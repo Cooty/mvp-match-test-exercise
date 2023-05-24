@@ -1,0 +1,43 @@
+.LoadingSpinner {
+  width: var(--spinner-size);
+  height: var(--spinner-size);
+  display: inline-block;
+  overflow: hidden;
+
+  &__animationContainer {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform: translateZ(0) scale(1);
+    backface-visibility: hidden;
+    transform-origin: 0 0;
+
+    div {
+      --spinner-border-width: calc(var(--spinner-size) * 0.1);
+      --spinner-inner-size: calc(
+        var(--spinner-size) / 2 + var(--spinner-border-width)
+      );
+      --spinner-offset: calc(var(--spinner-size) / 2);
+      box-sizing: content-box;
+      position: absolute;
+      width: var(--spinner-inner-size);
+      height: var(--spinner-inner-size);
+      border: var(--spinner-border-width) solid var(--spinner-color);
+      border-top-color: transparent;
+      border-radius: 50%;
+
+      animation: spin 1s linear infinite;
+      top: var(--spinner-offset);
+      left: var(--spinner-offset);
+    }
+  }
+}
+
+@keyframes spin {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}

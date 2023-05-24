@@ -4,4 +4,8 @@
   border-radius: $default-rounding * 2;
   padding: $gutter;
   background: $light-blue;
+
+  &__header {
+    margin-bottom: 30px;
+  }
 }
