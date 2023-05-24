@@ -21,6 +21,12 @@ const Filters: FC = () => {
   const setSelectedProjectOption = useProjectOptions(
     (state) => state.setSelected
   );
+  const [selectedProjectInput, setSelectedProjectInput] = useState<
+    Option | undefined
+  >(undefined);
+  const [selectedGatewayInput, setSelectedGatewayInput] = useState<
+    Option | undefined
+  >(undefined);
   const selectedProjectOption = useProjectOptions((state) => state.selected);
   const setSelectedGatewayOption = useGatewayOptions(
     (state) => state.setSelected
@@ -35,7 +41,7 @@ const Filters: FC = () => {
   const [fromDate, setFromDate] = useState<Date | null>(null);
   const projectsOnChangeHandler = (newValue: SingleValue<Option>) => {
     if (newValue?.label && newValue?.value) {
-      setSelectedProjectOption({
+      setSelectedProjectInput({
         label: newValue.label,
         value: newValue.value,
       });
@@ -43,7 +49,7 @@ const Filters: FC = () => {
   };
   const gatewaysOnChangeHandler = (newValue: SingleValue<Option>) => {
     if (newValue?.label && newValue?.value) {
-      setSelectedGatewayOption({
+      setSelectedGatewayInput({
         label: newValue.label,
         value: newValue.value,
       });
@@ -69,6 +75,11 @@ const Filters: FC = () => {
       projectId,
       gatewayId,
     };
+    // communicate the submitted project / gateway to the global store
+    if (selectedProjectInput && selectedGatewayInput) {
+      setSelectedProjectOption(selectedProjectInput);
+      setSelectedGatewayOption(selectedGatewayInput);
+    }
     fetchReports(payload);
   };
   useEffect(() => {
