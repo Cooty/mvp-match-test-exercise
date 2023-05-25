@@ -8,17 +8,21 @@ interface ProjectsState {
   projects: Option[] | null;
   error: string | null;
   fetch: () => void;
-  selected?: Option;
-  setSelected: (selectedOption: Option) => void;
+  selectedId: string;
+  selectedName: string;
+  setSelectedId: (selectedId: string) => void;
+  setSelectedName: (selectedName: string) => void;
 }
 
-export const useProjectOptions = create<ProjectsState>()(
+export const useProjects = create<ProjectsState>()(
   devtools((set) => ({
     projects: [],
     error: null,
-    setSelected: (selectedOption: Option) => {
-      set({ selected: selectedOption });
-    },
+    selectedId: "",
+    selectedName: "",
+    setSelectedId: (selectedId: string) => set({ selectedId: selectedId }),
+    setSelectedName: (selectedName: string) =>
+      set({ selectedName: selectedName }),
     fetch: async () => {
       try {
         const response = await fetch(

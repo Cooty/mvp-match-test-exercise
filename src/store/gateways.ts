@@ -8,17 +8,21 @@ interface GatewaysState {
   gateways: Option[] | null;
   error: string | null;
   fetch: () => void;
-  selected?: Option;
-  setSelected: (selectedOption: Option) => void;
+  selectedId: string;
+  selectedName: string;
+  setSelectedId: (selectedId: string) => void;
+  setSelectedName: (selectedName: string) => void;
 }
 
-export const useGatewayOptions = create<GatewaysState>()(
+export const useGateways = create<GatewaysState>()(
   devtools((set) => ({
     gateways: [],
     error: null,
-    setSelected: (selectedOption: Option) => {
-      set({ selected: selectedOption });
-    },
+    selectedId: "",
+    selectedName: "",
+    setSelectedId: (selectedId: string) => set({ selectedId: selectedId }),
+    setSelectedName: (selectedName: string) =>
+      set({ selectedName: selectedName }),
     fetch: async () => {
       try {
         const response = await fetch(

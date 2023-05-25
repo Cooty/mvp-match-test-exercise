@@ -3,12 +3,7 @@ import Stack from "../../ui/Stack";
 import "./Filters.scss";
 import Button from "../../ui/Button";
 import { CustomSelect } from "../../ui/CustomSelect";
-import {
-  useProjectOptions,
-  useGatewayOptions,
-  useReports,
-  useFilters,
-} from "../../store";
+import { useProjects, useGateways, useReports, useFilters } from "../../store";
 import { SingleValue } from "react-select";
 import { Option } from "../../ui/CustomSelect";
 import CustomDatePicker from "../../date/CustomDatePicker";
@@ -16,23 +11,19 @@ import ReportsPayload from "../../interfaces/ReportsPayload";
 import getISODateString from "../../date/get-iso-date-string";
 
 const Filters: FC = () => {
-  const projectOptions = useProjectOptions((state) => state.projects);
-  const gatewayOptions = useGatewayOptions((state) => state.gateways);
-  const setSelectedProjectOption = useProjectOptions(
-    (state) => state.setSelected
-  );
+  const projectOptions = useProjects((state) => state.projects);
+  const gatewayOptions = useGateways((state) => state.gateways);
+  const setSelectedProjectId = useProjects((state) => state.setSelectedId);
+  const setSelectedProjectName = useProjects((state) => state.setSelectedName);
+  const setSelectedGatewayId = useGateways((state) => state.setSelectedId);
+  const setSelectedGatewayName = useGateways((state) => state.setSelectedName);
   const [selectedProjectInput, setSelectedProjectInput] = useState<
     Option | undefined
   >(undefined);
   const [selectedGatewayInput, setSelectedGatewayInput] = useState<
     Option | undefined
   >(undefined);
-  const selectedProjectOption = useProjectOptions((state) => state.selected);
-  const setSelectedGatewayOption = useGatewayOptions(
-    (state) => state.setSelected
-  );
   const setFiltersToTouched = useFilters((state) => state.setToTouched);
-  const selectedGatewayOption = useGatewayOptions((state) => state.selected);
   const fetchReports = useReports((state) => state.fetch);
   const isReportsLoading = useReports((state) => state.isLoading);
   const reportsError = useReports((state) => state.error);
@@ -67,8 +58,8 @@ const Filters: FC = () => {
     const to = toDate && toDate instanceof Date ? getISODateString(toDate) : "";
     const from =
       fromDate && fromDate instanceof Date ? getISODateString(fromDate) : "";
-    const projectId = selectedProjectOption ? selectedProjectOption.value : "";
-    const gatewayId = selectedGatewayOption ? selectedGatewayOption.value : "";
+    const projectId = selectedProjectInput ? selectedProjectInput.value : "";
+    const gatewayId = selectedGatewayInput ? selectedGatewayInput.value : "";
     const payload: ReportsPayload = {
       to,
       from,
@@ -76,9 +67,14 @@ const Filters: FC = () => {
       gatewayId,
     };
     // communicate the submitted project / gateway to the global store
-    if (selectedProjectInput && selectedGatewayInput) {
-      setSelectedProjectOption(selectedProjectInput);
-      setSelectedGatewayOption(selectedGatewayInput);
+    if (selectedProjectInput) {
+      setSelectedProjectId(selectedProjectInput.value);
+      setSelectedProjectName(selectedProjectInput.label);
+    }
+    if (selectedGatewayInput) {
+      setSelectedGatewayId(selectedGatewayInput.value);
+      console.log(selectedGatewayInput.label);
+      setSelectedGatewayName(selectedGatewayInput.label);
     }
     fetchReports(payload);
   };

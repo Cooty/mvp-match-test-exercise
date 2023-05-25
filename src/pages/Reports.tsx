@@ -1,12 +1,7 @@
 import { FC, useEffect } from "react";
 import Empty from "./reports/states/Empty";
 import Filters from "./reports/Filters";
-import {
-  useGatewayOptions,
-  useProjectOptions,
-  useReports,
-  useFilters,
-} from "../store";
+import { useGateways, useProjects, useReports, useFilters } from "../store";
 import AllProjectsAllGateways from "./reports/states/AllProjectsAllGateways";
 import SelectedProjectAllGateways from "./reports/states/SelectedProjectAllGateways";
 import SelectedGatewayAllProjects from "./reports/states/SelectedGatewayAllProjects";
@@ -14,13 +9,13 @@ import SelectedProjectSelectedGateway from "./reports/states/SelectedProjectSele
 import Loading from "./reports/states/Loading";
 
 const Reports: FC = () => {
-  const fetchProjectOptionsError = useProjectOptions((state) => state.error);
-  const fetchProjectOptions = useProjectOptions((state) => state.fetch);
-  const selectedProjectOption = useProjectOptions((state) => state.selected);
+  const fetchProjectOptionsError = useProjects((state) => state.error);
+  const fetchProjectOptions = useProjects((state) => state.fetch);
+  const selectedProjectId = useProjects((state) => state.selectedId);
 
-  const fetchGatewayOptions = useGatewayOptions((state) => state.fetch);
-  const fetchGatewayOptionsError = useGatewayOptions((state) => state.error);
-  const selectedGatewayOption = useGatewayOptions((state) => state.selected);
+  const fetchGatewayOptions = useGateways((state) => state.fetch);
+  const fetchGatewayOptionsError = useGateways((state) => state.error);
+  const selectedGatewayId = useGateways((state) => state.selectedId);
 
   const filtersTouched = useFilters((state) => state.isTouched);
 
@@ -59,32 +54,32 @@ const Reports: FC = () => {
       {!reportsLoading &&
       reports &&
       reports?.length &&
-      !selectedGatewayOption &&
-      !selectedProjectOption ? (
+      !selectedGatewayId &&
+      !selectedProjectId ? (
         <AllProjectsAllGateways />
       ) : null}
 
       {!reportsLoading &&
       reports &&
       reports?.length &&
-      selectedProjectOption &&
-      !selectedGatewayOption ? (
+      selectedProjectId &&
+      !selectedGatewayId ? (
         <SelectedProjectAllGateways />
       ) : null}
 
       {!reportsLoading &&
       reports &&
       reports?.length &&
-      !selectedProjectOption &&
-      selectedGatewayOption ? (
+      !selectedProjectId &&
+      selectedGatewayId ? (
         <SelectedGatewayAllProjects />
       ) : null}
 
       {!reportsLoading &&
       reports &&
       reports?.length &&
-      selectedProjectOption &&
-      selectedGatewayOption ? (
+      selectedProjectId &&
+      selectedGatewayId ? (
         <SelectedProjectSelectedGateway />
       ) : null}
 
