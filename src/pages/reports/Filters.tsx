@@ -34,20 +34,16 @@ const Filters: FC = () => {
   const [toDate, setToDate] = useState<Date | null>(null);
   const [fromDate, setFromDate] = useState<Date | null>(null);
   const projectsOnChangeHandler = (newValue: SingleValue<Option>) => {
-    if (newValue?.label && newValue?.value) {
-      setSelectedProjectInput({
-        label: newValue.label,
-        value: newValue.value,
-      });
-    }
+    setSelectedProjectInput({
+      label: newValue?.label ? newValue.label : "",
+      value: newValue?.value ? newValue.value : "",
+    });
   };
   const gatewaysOnChangeHandler = (newValue: SingleValue<Option>) => {
-    if (newValue?.label && newValue?.value) {
-      setSelectedGatewayInput({
-        label: newValue.label,
-        value: newValue.value,
-      });
-    }
+    setSelectedGatewayInput({
+      label: newValue?.label ? newValue.label : "",
+      value: newValue?.value ? newValue.value : "",
+    });
   };
   const fromDateOnChangeHandler = (date: Date | null) => {
     setFromDate(date);
