@@ -27,7 +27,10 @@ const Filters: FC = () => {
   const fetchReports = useReports((state) => state.fetch);
   const isReportsLoading = useReports((state) => state.isLoading);
   const reportsError = useReports((state) => state.error);
-  const dateFormat = "MM.dd.yyyy";
+  const fromMinDate = new Date("2021-01-01");
+  const fromMaxDate = new Date("2021-12-30");
+  const toMinDate = new Date("2021-01-02");
+  const toMaxDate = new Date("2021-12-31");
   const [toDate, setToDate] = useState<Date | null>(null);
   const [fromDate, setFromDate] = useState<Date | null>(null);
   const projectsOnChangeHandler = (newValue: SingleValue<Option>) => {
@@ -117,7 +120,9 @@ const Filters: FC = () => {
               placeholderText="from"
               selected={fromDate}
               onChange={fromDateOnChangeHandler}
-              dateFormat={dateFormat}
+              minDate={fromMinDate}
+              maxDate={fromMaxDate}
+              startDate={fromMinDate}
             />
           </div>
           <div className="Filters__datePickerContainer">
@@ -125,7 +130,8 @@ const Filters: FC = () => {
               placeholderText="to"
               selected={toDate}
               onChange={toDateOnChangeHandler}
-              dateFormat={dateFormat}
+              minDate={toMinDate}
+              maxDate={toMaxDate}
             />
           </div>
           <Button type="submit" disabled={isReportsLoading}>
