@@ -14,12 +14,14 @@ interface GatewaysState {
   setSelectedName: (selectedName: string) => void;
 }
 
+const labelForUnselectedState = "All gateways";
+
 export const useGateways = create<GatewaysState>()(
   devtools((set) => ({
     gateways: [],
     error: null,
     selectedId: "",
-    selectedName: "",
+    selectedName: labelForUnselectedState,
     setSelectedId: (selectedId: string) => set({ selectedId: selectedId }),
     setSelectedName: (selectedName: string) =>
       set({ selectedName: selectedName }),
@@ -41,7 +43,10 @@ export const useGateways = create<GatewaysState>()(
                 "name"
               )
             );
-            const allGatewaysOption = { value: "", label: "All gateways" };
+            const allGatewaysOption = {
+              value: "",
+              label: labelForUnselectedState,
+            };
             gatewayOptions.unshift(allGatewaysOption);
             set({
               gateways: gatewayOptions,

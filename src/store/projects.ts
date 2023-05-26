@@ -14,12 +14,14 @@ interface ProjectsState {
   setSelectedName: (selectedName: string) => void;
 }
 
+const labelForUnselectedState = "All gateways";
+
 export const useProjects = create<ProjectsState>()(
   devtools((set) => ({
     projects: [],
     error: null,
     selectedId: "",
-    selectedName: "",
+    selectedName: labelForUnselectedState,
     setSelectedId: (selectedId: string) => set({ selectedId: selectedId }),
     setSelectedName: (selectedName: string) =>
       set({ selectedName: selectedName }),
@@ -41,7 +43,10 @@ export const useProjects = create<ProjectsState>()(
                 "name"
               )
             );
-            const allProjectsOption = { value: "", label: "All projects" };
+            const allProjectsOption = {
+              value: "",
+              label: labelForUnselectedState,
+            };
             projectOptions.unshift(allProjectsOption);
             set({
               projects: projectOptions,
