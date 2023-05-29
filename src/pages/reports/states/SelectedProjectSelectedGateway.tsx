@@ -1,21 +1,51 @@
-import { FC } from "react";
+import { FC, useEffect, useState } from "react";
 import ReportsContainer from "../ReportsContainer";
 import Table from "../../../ui/Table";
 import SummedUpReportAmount from "../SummedUpReportAmount/SummedUpReportAmount";
+import { useReports } from "../../../store";
+import ReportTableRow from "../report-table-row/ReportTableRow";
+import makeTableRowsFromReports from "../report-table-row/make-table-rows-from-reports";
+import FormattedDate from "../../../date/FormattedDate";
+import FormattedMoney from "../../../money/FormattedMoney";
 
 const SelectedProjectSelectedGateway: FC = () => {
-  const DUMMY_DATA = [
-    ["Date", "Transaction Id", "Gateway"],
-    ["2021/01/12", "sdsdsdsd", "Amazon"],
-    ["2021/02/21", "cvcvr4e", "PayPal"],
-    ["2021/09/18", "cdeerrgb", "Google Pay"],
-    ["2021/11/08", "sddvvv454", "Stripe"],
-  ];
+  const tableHeaders = ["Date", "Transaction Id", "Amount"];
+  const reports = useReports((state) => state.reports);
+  const [tableData, setTableData] = useState<ReportTableRow[]>([]);
+
+  useEffect(() => {
+    if (reports && reports.length) {
+      setTableData(makeTableRowsFromReports(reports));
+    }
+  }, [reports]);
 
   return (
     <>
       <ReportsContainer>
-        <Table rows={DUMMY_DATA} />
+        {tableData.length ? (
+          <Table>
+            <>
+              <tr>
+                {tableHeaders.map((header) => (
+                  <td key={header}>{header}</td>
+                ))}
+              </tr>
+              {tableData.map((row) => {
+                return (
+                  <tr key={row.paymentId}>
+                    <td>
+                      <FormattedDate isoString={row.date} />
+                    </td>
+                    <td>{row.paymentId}</td>
+                    <td>
+                      <FormattedMoney amount={row.amount} />
+                    </td>
+                  </tr>
+                );
+              })}
+            </>
+          </Table>
+        ) : null}
       </ReportsContainer>
       <SummedUpReportAmount />
     </>

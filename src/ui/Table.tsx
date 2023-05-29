@@ -1,22 +1,14 @@
-import { FC, HTMLAttributes } from "react";
+import { FC, HTMLAttributes, ReactNode } from "react";
 import "./Table.scss";
 
 type Props = HTMLAttributes<HTMLTableElement> & {
-  rows: Array<string[]>;
+  children: ReactNode;
 };
 
-const Table: FC<Props> = ({ rows, ...props }) => {
+const Table: FC<Props> = ({ children, ...props }) => {
   return (
     <table {...props} className="Table">
-      <tbody>
-        {rows.map((row) => (
-          <tr key={row[0]}>
-            {row.map((cell) => (
-              <td key={cell}>{cell}</td>
-            ))}
-          </tr>
-        ))}
-      </tbody>
+      <tbody>{children}</tbody>
     </table>
   );
 };
