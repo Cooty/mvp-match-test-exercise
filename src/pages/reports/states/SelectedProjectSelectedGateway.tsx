@@ -1,7 +1,7 @@
 import { FC } from "react";
 import ReportsContainer from "../ReportsContainer";
 import Table from "../../../ui/Table";
-import Box from "../../../ui/Box";
+import SummedUpReportAmount from "../SummedUpReportAmount/SummedUpReportAmount";
 
 const SelectedProjectSelectedGateway: FC = () => {
   const DUMMY_DATA = [
@@ -17,9 +17,7 @@ const SelectedProjectSelectedGateway: FC = () => {
       <ReportsContainer>
         <Table rows={DUMMY_DATA} />
       </ReportsContainer>
-      <Box className="mt-40">
-        <strong>Total | 10,456 USD</strong>
-      </Box>
+      <SummedUpReportAmount />
     </>
   );
 };
