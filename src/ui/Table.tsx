@@ -10,9 +10,9 @@ const Table: FC<Props> = ({ rows, ...props }) => {
     <table {...props} className="Table">
       <tbody>
         {rows.map((row) => (
-          <tr>
+          <tr key={row[0]}>
             {row.map((cell) => (
-              <td>{cell}</td>
+              <td key={cell}>{cell}</td>
             ))}
           </tr>
         ))}

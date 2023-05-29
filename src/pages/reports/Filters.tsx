@@ -72,7 +72,6 @@ const Filters: FC = () => {
     }
     if (selectedGatewayInput) {
       setSelectedGatewayId(selectedGatewayInput.value);
-      console.log(selectedGatewayInput.label);
       setSelectedGatewayName(selectedGatewayInput.label);
     }
     fetchReports(payload);
