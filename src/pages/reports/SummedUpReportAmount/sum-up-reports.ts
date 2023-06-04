@@ -1,4 +1,4 @@
-import Report from "../interfaces/Report";
+import Report from "../../../interfaces/Report";
 
 function sumUpReports(reports: Report[]) {
   const amounts = reports.map((report) => report.amount);

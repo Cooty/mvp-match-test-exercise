@@ -1,0 +1,26 @@
+@import "../../styles/config/";
+
+.ReportsAccordion {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  &__header {
+    background-color: $white;
+    padding: 26px 24px;
+    margin-bottom: 8px;
+    border-radius: $default-rounding * 2;
+    display: flex;
+    justify-content: space-between;
+    cursor: pointer;
+  }
+
+  &__body {
+    padding: 4px 0 20px 0;
+    display: none;
+  }
+
+  &__body--show {
+    display: block;
+  }
+}

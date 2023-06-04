@@ -14,7 +14,7 @@ interface ProjectsState {
   setSelectedName: (selectedName: string) => void;
 }
 
-const labelForUnselectedState = "All gateways";
+const labelForUnselectedState = "All projects";
 
 export const useProjects = create<ProjectsState>()(
   devtools((set) => ({

@@ -38,7 +38,7 @@ const SelectedProjectSelectedGateway: FC = () => {
                     </td>
                     <td>{row.paymentId}</td>
                     <td>
-                      <FormattedMoney amount={row.amount} />
+                      <FormattedMoney amount={row.amount as number} />
                     </td>
                   </tr>
                 );

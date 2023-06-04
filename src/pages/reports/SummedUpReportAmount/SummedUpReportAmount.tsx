@@ -9,8 +9,8 @@ const SummedUpReportAmount: FC = () => {
 
   return (
     <Box className="mt-40">
-      <strong>
-        Total | <FormattedMoney amount={sumUpReports(reports).toFixed(2)} />
+      <strong className="text-uppercase">
+        Total | <FormattedMoney amount={sumUpReports(reports)} />
       </strong>
     </Box>
   );

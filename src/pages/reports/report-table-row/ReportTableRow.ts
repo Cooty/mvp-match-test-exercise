@@ -1,7 +1,8 @@
 interface ReportTableRow {
   date: string;
   paymentId: string;
-  amount: number;
+  amount: number | string;
+  gatewayName?: string;
 }
 
 export default ReportTableRow;
