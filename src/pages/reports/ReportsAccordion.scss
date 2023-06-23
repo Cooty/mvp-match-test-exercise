@@ -12,12 +12,14 @@
     border-radius: $default-rounding * 2;
     display: flex;
     justify-content: space-between;
+  }
+
+  &__header--clickable {
     cursor: pointer;
   }
 
-  &__body {
+  &__body-padding {
     padding: 4px 0 20px 0;
-    display: none;
   }
 
   &__body--show {

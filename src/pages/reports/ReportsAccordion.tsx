@@ -2,6 +2,7 @@ import { FC, Fragment, useState, useEffect } from "react";
 import classNames from "classnames";
 import "./ReportsAccordion.scss";
 import Table from "../../ui/Table";
+import AnimateHeight from "react-animate-height";
 
 export interface ReportsSummary {
   groupId: string;
@@ -27,10 +28,15 @@ const ReportsAccordion: FC<Props> = ({ reports }) => {
         return (
           <Fragment key={summarizedReportGroup.groupId}>
             <dt
-              className="ReportsAccordion__header"
+              className={classNames("ReportsAccordion__header", {
+                "ReportsAccordion__header--clickable":
+                  summarizedReportGroup.groupId !== openedGroupId,
+              })}
               onClick={() => {
                 setOpenedGroupId(summarizedReportGroup.groupId);
               }}
+              aria-controls={summarizedReportGroup.groupId}
+              aria-expanded={summarizedReportGroup.groupId === openedGroupId}
             >
               <strong className="ReportsAccordion__headerLeft">
                 {summarizedReportGroup.groupName}
@@ -39,23 +45,28 @@ const ReportsAccordion: FC<Props> = ({ reports }) => {
                 Total: {summarizedReportGroup.summarizedAmount}
               </strong>
             </dt>
-            <dd
-              className={classNames("ReportsAccordion__body", {
-                "ReportsAccordion__body--show":
-                  summarizedReportGroup.groupId === openedGroupId,
-              })}
-            >
-              <Table>
-                {summarizedReportGroup.reportRows.map((row) => {
-                  return (
-                    <tr key={JSON.stringify(row)}>
-                      {row.map((cell) => (
-                        <td key={cell}>{cell}</td>
-                      ))}
-                    </tr>
-                  );
-                })}
-              </Table>
+            <dd className="ReportsAccordion__body">
+              <AnimateHeight
+                duration={300}
+                id={summarizedReportGroup.groupId}
+                height={
+                  summarizedReportGroup.groupId === openedGroupId ? "auto" : 0
+                }
+              >
+                <div className="ReportsAccordion__body-padding">
+                  <Table>
+                    {summarizedReportGroup.reportRows.map((row) => {
+                      return (
+                        <tr key={JSON.stringify(row)}>
+                          {row.map((cell) => (
+                            <td key={cell}>{cell}</td>
+                          ))}
+                        </tr>
+                      );
+                    })}
+                  </Table>
+                </div>
+              </AnimateHeight>
             </dd>
           </Fragment>
         );
