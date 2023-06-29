@@ -4,13 +4,17 @@ import Box from "../../../ui/Box";
 import sumUpReports from "./sum-up-reports";
 import FormattedMoney from "../../../money/FormattedMoney";
 
-const SummedUpReportAmount: FC = () => {
+interface Props {
+  label?: string;
+}
+
+const SummedUpReportAmount: FC<Props> = ({ label }) => {
   const reports = useReports((state) => state.reports) || [];
 
   return (
     <Box className="mt-40">
       <strong className="text-uppercase">
-        Total | <FormattedMoney amount={sumUpReports(reports)} />
+        {label || "Total"} | <FormattedMoney amount={sumUpReports(reports)} />
       </strong>
     </Box>
   );
