@@ -67,7 +67,7 @@ const Chart: FC<Props> = ({ summary, labels, toolTipLabel, data }) => {
           }}
         />
       </div>
-      {summary} const chartData = ;
+      {summary}
     </figure>
   );
 };
