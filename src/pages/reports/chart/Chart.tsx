@@ -49,6 +49,10 @@ const Chart: FC<Props> = ({ summary, labels, toolTipLabel, data }) => {
             plugins: {
               datalabels: {
                 color: "#fff",
+                font: {
+                  weight: 500,
+                  size: 16,
+                },
                 formatter: (value, ctx) => {
                   let sum = 0;
                   const dataArr = ctx.chart.data.datasets[0].data;
